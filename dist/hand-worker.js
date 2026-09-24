@@ -12,7 +12,7 @@ self.onmessage=async({data})=>{
    const start=performance.now();try{
     const result=detector.detectForVideo(data.bitmap,data.time);
     if(poseDetector&&(++frames%3===0||result.landmarks.some(isTwoFingerTap))){try{const body=poseDetector.detectForVideo(data.bitmap,data.time);pose=body.landmarks[0]||null;poseWorld=body.worldLandmarks[0]||null;poseTime=data.time;}catch(error){poseDetector.close();poseDetector=null;pose=poseWorld=null;self.postMessage({type:'pose-warning',message:String(error)});}}
-    self.postMessage({type:'result',landmarks:result.landmarks,pose,poseWorld,poseAge:data.time-poseTime,ms:performance.now()-start});
+    self.postMessage({type:'result',landmarks:result.landmarks,handedness:result.handedness,pose,poseWorld,poseAge:data.time-poseTime,ms:performance.now()-start});
    }finally{data.bitmap.close();}
   }
  }catch(error){self.postMessage({type:'error',message:String(error)});}

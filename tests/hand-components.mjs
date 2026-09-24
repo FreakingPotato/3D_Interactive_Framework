@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {fingerDigit,handSide,ComponentHold,componentDigits} from '../dist/hand-components.js';
+function hand(n){const l=Array.from({length:21},()=>({x:.5,y:.65}));l[0]={x:.5,y:.9};for(let f=0;f<4;f++){for(let j=0;j<4;j++)l[5+f*4+j]={x:.38+f*.08,y:.65-j*.13};if(!(n===6?f===3:f<Math.min(n,4)))l[8+f*4].y=.8;}l[2]={x:.4,y:.65};l[4]=n>=5?{x:.2,y:.5}:{...l[5]};return l;}
+for(let i=1;i<=6;i++)assert.equal(fingerDigit(hand(i)),i);
+assert.equal(fingerDigit(hand(0)),null);
+const h=new ComponentHold();assert.equal(h.update(3,0).select,undefined);for(let t=100;t<700;t+=100)assert.equal(h.update(3,t).select,undefined);assert.equal(h.update(3,700).select,'rna');assert.equal(h.update(3,800).select,undefined);assert.equal(h.update(2,900).select,undefined);assert.equal(h.update(2,1700).select,undefined);h.update(null,1800);assert.equal(h.digit,null);
+assert.deepEqual(componentDigits,['membrane','dna','rna','ribosome','rnap','protein']);
+const result={landmarks:[hand(1)],handedness:[[{categoryName:'Right',score:.95}]]};assert.equal(handSide(result,0),'left');result.handedness[0][0].categoryName='Left';assert.equal(handSide(result,0),'right');result.handedness[0][0].score=.5;assert.equal(handSide(result,0),'unknown');result.pose=Array.from({length:33},()=>({x:0,y:0,visibility:0}));result.pose[15]={...result.landmarks[0][0],visibility:1};result.poseAge=100;assert.equal(handSide(result,0),'left');result.poseAge=500;assert.equal(handSide(result,0),'unknown');console.log('PASS digits 1–6, mapping, hold/rearm/tracking gap, mirrored labels and fresh pose roles');

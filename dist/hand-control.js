@@ -1,3 +1,4 @@
+import {handSide,fingerDigit,ComponentHold,componentDigits} from './hand-components.js';
 import {HandGestures} from './hand-gestures.js';
 import {DwellSelection,timeFromTurn} from './hand-interactions.js';
 import {createTimeAura} from './time-aura.js';
@@ -6,14 +7,20 @@ import {playIronSuit} from './iron-suit.js';
 export function initHandControl(getApp){
  const style=document.createElement('link');style.rel='stylesheet';style.href='/hand-control.css';document.head.append(style);const suitStyle=document.createElement('link');suitStyle.rel='stylesheet';suitStyle.href='/iron-suit.css';document.head.append(suitStyle);
  const toggle=document.createElement('button');toggle.id='hand-toggle';toggle.textContent='手势控制';toggle.setAttribute('aria-expanded','false');document.querySelector('.header-right').prepend(toggle);
- const panel=document.createElement('section');panel.id='hand-panel';panel.hidden=true;panel.innerHTML='<h3>摄像头手势</h3><p>识别在本机浏览器运行，画面不上传。首次加载需要片刻。</p><video muted playsinline autoplay hidden></video><p id="hand-status" role="status">摄像头已关闭</p><button id="hand-start">开启摄像头</button> <button id="hand-stop" disabled>关闭摄像头</button><details id="hand-instructions"><summary>手势操作说明</summary><p>张开单手移动：360° 旋转<br>双手张开，分开或靠拢：缩放<br>双手拇指与食指成 L：拉开增加剖切深度，靠拢减小<br>只竖食指：移动光标<br>悬停一秒：选中或点击按钮<br>空白区域悬停一秒：取消选中<br>选中组件后，捏住横拖：其他组件透明度<br>张开手掌静止三秒：时间宝石<br>左右转掌：回溯或前进 · 握拳退出<br>手掌面向镜头，像拧旋钮一样左右各转 90°</p><p>请让手掌完整进入画面。关闭面板不会关闭摄像头；切到后台会自动关闭。</p></details>';document.body.append(panel);
+ const panel=document.createElement('section');panel.id='hand-panel';panel.hidden=true;panel.innerHTML='<h3>摄像头手势</h3><p>识别在本机浏览器运行，画面不上传。首次加载需要片刻。</p><video muted playsinline autoplay hidden></video><p id="hand-status" role="status">摄像头已关闭</p><button id="hand-start">开启摄像头</button> <button id="hand-stop" disabled>关闭摄像头</button><details id="hand-instructions"><summary>手势操作说明</summary><p>右手张掌移动：360° 旋转<br>双手张开，分开或靠拢：缩放<br>双手拇指与食指成 L：拉开增加剖切深度，靠拢减小<br>右手只竖食指：移动光标<br>左手数字保持 0.7 秒：1 膜 · 2 DNA · 3 RNA · 4 核糖体 · 5 RNA 聚合酶 · 6 蛋白质<br>1–4 依次伸出食指至小指，5 张掌，6 拇指＋小指；左手不控制光标<br>悬停一秒：选中或点击按钮<br>空白区域悬停一秒：取消选中<br>选中组件后，捏住横拖：其他组件透明度<br>右手张掌静止三秒：时间宝石<br>左右转掌：回溯或前进 · 握拳退出，恢复原播放状态<br>手掌面向镜头，像拧旋钮一样左右各转 90°</p><p>请让手掌完整进入画面。关闭面板不会关闭摄像头；切到后台会自动关闭。</p></details>';document.body.append(panel);
+ const markComponents=()=>componentDigits.forEach((id,i)=>{const button=document.querySelector(`[data-component="${id}"]`);if(button&&!button.querySelector('.hand-digit')){const badge=document.createElement('small');badge.className='hand-digit';badge.textContent=' '+(i+1);badge.title='左手 / Left hand';button.append(badge);}});
+ const componentList=document.querySelector('#component-list');if(componentList)new MutationObserver(markComponents).observe(componentList,{childList:true});markComponents();
  const cursor=document.createElement('div');cursor.id='hand-cursor';cursor.hidden=true;document.body.append(cursor);
- const video=panel.querySelector('video'),status=panel.querySelector('#hand-status'),start=panel.querySelector('#hand-start'),stop=panel.querySelector('#hand-stop'),engine=new HandGestures(),dwell=new DwellSelection(),aura=createTimeAura(panel,video),chestTap=new ChestTap();
+ const video=panel.querySelector('video'),status=panel.querySelector('#hand-status'),start=panel.querySelector('#hand-start'),stop=panel.querySelector('#hand-stop'),engine=new HandGestures(),dualEngine=new HandGestures(),dwell=new DwellSelection(),aura=createTimeAura(panel,video),chestTap=new ChestTap();
  let suitSequence=null,suiting=false,poseEnabled=false,lastPose=null;
+ const componentHold=new ComponentHold();
+ let resumePlayback=null;
  let cutSession=null,timeSession=null,pendingSeek=null,seekBusy=false,seekTimer=0,lastSeek=0;
  const runKey=()=>getApp()?.state.rep||getApp()?.state.run;
- async function flushSeek(){if(seekBusy||!pendingSeek)return;const task=pendingSeek;pendingSeek=null;if(task.key!==runKey())return;seekBusy=true;lastSeek=performance.now();try{await getApp().setTime(task.time);}finally{seekBusy=false;if(pendingSeek)seekTimer=setTimeout(flushSeek,150);}}
- function resetInteraction(){cutSession=null;dwell.reset();aura.hide();timeSession=null;pendingSeek=null;clearTimeout(seekTimer);cursor.style.setProperty("--dwell",0);}
+ function restorePlayback(){if(!resumePlayback||seekBusy||pendingSeek||timeSession)return;const session=resumePlayback;resumePlayback=null;const app=getApp();if(session.key===runKey()&&session.wasPlaying&&!app.state.playing){if(app.setPlaying)app.setPlaying(true);else document.querySelector('#play')?.click();}}
+ function finishTime(){if(!timeSession)return;resumePlayback=timeSession;timeSession=null;if(pendingSeek)flushSeek();else restorePlayback();}
+ async function flushSeek(){if(seekBusy||!pendingSeek)return;const task=pendingSeek;pendingSeek=null;if(task.key!==runKey())return;seekBusy=true;lastSeek=performance.now();try{await getApp().setTime(task.time);}finally{seekBusy=false;if(pendingSeek)seekTimer=setTimeout(flushSeek,150);else restorePlayback();}}
+ function resetInteraction(){finishTime();componentHold.reset();dualEngine.reset();cutSession=null;dwell.reset();aura.hide();cursor.style.setProperty("--dwell",0);}
  let worker=null,stream=null,generation=0,timer=0,watchdog=0,stale=0,busy=false,active=false,hoverUI=null,opacityStart=null,frames=0,lastMS=0;
  const bridge=()=>getApp()?.view?.gestures;
  const clear=()=>{cursor.hidden=true;hoverUI?.classList.remove('hand-ui-hover');hoverUI=null;bridge()?.clear();};
@@ -32,20 +39,36 @@ export function initHandControl(getApp){
   if(result.pose&&[11,12].every(i=>(result.pose[i]?.visibility||0)>.35))lastPose=result.pose;
   if(!document.querySelector('dialog[open]')){const trigger=chestTap.update(result,performance.now());if(trigger){startSuit(result.pose);return;}}else{chestTap.reset();}
   const modal=document.querySelector('dialog[open]');const parent=modal||document.body;if(cursor.parentNode!==parent){parent.append(cursor);dwell.reset();}
-  const action=engine.update(result.landmarks,performance.now());
-  const labels={waiting:'等待手势',rotate:'单手旋转',zoom:'双手缩放',cut:'双手 L 形 · 剖切深度',pointer:'悬停一秒选中',pinch:'捏住横拖调透明度',opacity:'调节其他组件透明度',time:'时间宝石 · 左回溯 / 右前进', 'time-exit':'已退出时间宝石'};
-  status.textContent=labels[action.mode];
+  const now=performance.now(),sides=result.landmarks.map((_,i)=>handSide(result,i));
+  let action;
+  if(result.landmarks.length===2){
+   action=dualEngine.update(result.landmarks,now);
+   if(!['zoom','cut'].includes(action.mode))action=null;else engine.reset();
+  }
+  if(result.landmarks.length!==2)dualEngine.reset();
+  if(!action){
+   const left=sides.indexOf('left'),right=sides.indexOf('right');
+   const digit=left>=0&&!modal?fingerDigit(result.landmarks[left]):null;
+   const choice=componentHold.update(digit,now);
+   if(choice.select&&document.querySelector(`[data-component="${choice.select}"]`))getApp()?.select(choice.select);
+   if(right>=0)action=engine.update([result.landmarks[right]],now);
+   else{engine.reset();action={mode:digit?'component':'waiting'};}
+   if(digit&&action.mode==='waiting')action.mode='component';
+   action.digit=choice.digit;action.progress=choice.progress;
+  }else componentHold.reset();
+  const labels={component:'左手数字选组件',waiting:'等待手势',rotate:'单手旋转',zoom:'双手缩放',cut:'双手 L 形 · 剖切深度',pointer:'悬停一秒选中',pinch:'捏住横拖调透明度',opacity:'调节其他组件透明度',time:'时间宝石 · 左回溯 / 右前进', 'time-exit':'已退出时间宝石'};
+  status.textContent=labels[action.mode];if(action.digit)status.textContent+=' · '+action.digit+' ('+Math.round(action.progress*100)+'%)';
   if(action.mode==='time'&&!modal){
    clear();dwell.reset();
    const app=getApp();
-   if(!timeSession){const times=app.state.meta?.times||app.state.rows?.map(r=>r.time)||[];if(!times.length){engine.reset();return;}timeSession={anchor:app.state.time,min:times[0],max:times.at(-1),key:runKey(),lastTarget:app.state.time};if(app.state.playing)document.querySelector('#play').click();if(app.state.local)app.state.follow=false;pendingSeek={time:timeSession.anchor,key:runKey()};flushSeek();}
+   if(!timeSession){const times=app.state.meta?.times||app.state.rows?.map(r=>r.time)||[];if(!times.length){engine.reset();return;}resumePlayback=null;timeSession={wasPlaying:app.state.playing,anchor:app.state.time,min:times[0],max:times.at(-1),key:runKey(),lastTarget:app.state.time};if(app.state.playing)document.querySelector('#play').click();if(app.state.local)app.state.follow=false;pendingSeek={time:timeSession.anchor,key:runKey()};flushSeek();}
    if(timeSession.key!==runKey()){engine.reset();resetInteraction();return;}
    if(action.turn!==undefined){const t=timeFromTurn(action.turn,timeSession.anchor,timeSession.min,timeSession.max);const times=app.state.meta?.times;let mapped=t;if(times){let lo=0,hi=times.length-1;while(lo<hi){const mid=Math.ceil((lo+hi)/2);if(times[mid]<=t)lo=mid;else hi=mid-1;}mapped=times[lo];}else mapped=Math.round(t*10)/10;
     if(mapped!==timeSession.lastTarget){timeSession.lastTarget=mapped;pendingSeek={time:mapped,key:runKey()};clearTimeout(seekTimer);seekTimer=setTimeout(flushSeek,Math.max(0,150-(performance.now()-lastSeek)));}
    }
    aura.show(action,Math.round(timeSession.lastTarget)+' s · ↶ / ↷');return;
   }
-  if(timeSession){timeSession=null;if(pendingSeek)flushSeek();}
+  if(timeSession)finishTime();
   if(modal&&action.mode==='time'){engine.reset();}
   if(!modal&&action.hold>0)aura.countdown(action);else aura.hide();
   if(!modal&&action.rotate)bridge()?.rotate(action.rotate.x,action.rotate.y);

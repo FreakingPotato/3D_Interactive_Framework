@@ -477,5 +477,13 @@
   "后台缓存暂停，仍可按需播放": "Background caching paused; on-demand playback remains available",
   "后台缓存": "Background caching",
   "预处理演示 · 本地部署可连接更多数据": "Precomputed demo · deploy locally to connect more data",
-  "60 秒预处理数据 · 无实时求解 · 摄像头仅在本机处理": "60 s precomputed clip · no live solver · on-device camera processing"
+  "60 秒预处理数据 · 无实时求解 · 摄像头仅在本机处理": "60 s precomputed clip · no live solver · on-device camera processing",
+  "右手张掌移动：360° 旋转": "Open right palm: rotate 360°",
+  "右手只竖食指：移动光标": "Right index finger: move cursor",
+  "左手数字保持 0.7 秒：1 膜 · 2 DNA · 3 RNA · 4 核糖体 · 5 RNA 聚合酶 · 6 蛋白质": "Hold a left-hand number for 0.7 s: 1 membrane · 2 DNA · 3 RNA · 4 ribosomes · 5 RNA polymerase · 6 proteins",
+  "1–4 依次伸出食指至小指，5 张掌，6 拇指＋小指；左手不控制光标": "1–4: index through little finger, thumb folded; 5: open palm; 6: thumb + little finger. Left hand does not move the cursor.",
+  "右手张掌静止三秒：时间宝石": "Hold right palm still for three seconds: Time Stone",
+  "左右转掌：回溯或前进 · 握拳退出，恢复原播放状态": "Turn palm: rewind / forward · Make a fist to exit and restore playback",
+  "左手数字选组件": "Left-hand component selection",
+  "左手 / Left hand": "Left hand"
 }
