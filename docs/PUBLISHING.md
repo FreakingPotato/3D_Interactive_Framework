@@ -16,7 +16,7 @@ The workflow validates hashes and counts, builds with GitHub's base path, upload
 
 ## Contents and size
 
-- Two real 0–60 second data clips: ~24 MB compressed together.
+- Two full recorded cycles: ~163 MB compressed together. Default 60×; the 7200 s minimal-cell trajectory takes about two minutes, or one minute at 120×.
 - Scientific view assets, predicted structure meshes, browser libraries and optional hand models are bundled. First view loads only necessary files; the minimal-cell clip downloads progressively in the background, protein and hand assets are demand-loaded.
 - Each regular Git file is below 100 MiB. The build asserts the complete site is below 1 GiB; exact size is printed by `build_site.py`.
 - GitHub documents a **1 GB published-site limit**, **100 GB/month soft bandwidth limit**, and a **10-minute deployment timeout**. These are limits, not a guarantee of unlimited visitors. See [official Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).

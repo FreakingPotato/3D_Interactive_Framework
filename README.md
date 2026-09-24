@@ -25,11 +25,13 @@ Whole-cell models are our first applications — **the framework is not a whole-
 
 | Example | Included data | What it demonstrates |
 |---|---|---|
-| **vEcoli** | Precomputed 0–60 s, baseline E. coli | Quantitative model adapter with an illustrative 3D layout |
-| **4D Minimal Cell / JCVI-syn3A** | Official replicate 1, 61 spatial frames, 0–60 s | Native voxel-centered spatial data; every recorded particle retained |
+| **vEcoli** | Complete baseline mother-cell observations, 0–2529 s; division event at 2530 s | Quantitative model adapter with an illustrative 3D layout |
+| **4D Minimal Cell / JCVI-syn3A** | Official replicate 1, 262 spatial snapshots, 0–7200 s including binary fission | Native voxel-centered spatial data; every recorded particle retained |
 | **Particle Lab** | Synthetic populations generated in-browser | A small non-biological adapter using the same hand / scene / sound modules |
 
-The two scientific data clips together are about **24 MB compressed**. Optional protein structures and camera models load when needed. The complete static package is larger because it includes ready-to-use assets. The demo runs no solver and has no live experiment endpoint.
+Default playback is **60×**: the minimal-cell cycle takes about two minutes; select **120×** for about one minute. Its native occupancy grid first separates into two large disconnected regions at **6676 s**. vEcoli provides a division event, not measured daughter-cell geometry.
+
+The two scientific data clips together are about **163 MB compressed**. Optional protein structures and camera models load when needed. The complete static package is larger because it includes ready-to-use assets. The demo runs no solver and has no live experiment endpoint.
 
 ## Run locally
 
@@ -78,7 +80,7 @@ Reusable modules live in `dist/` (readable JavaScript source, despite the folder
 
 ## Performance and interpretation
 
-A full minimal-cell trajectory contains 7,201 frames; downloading and decoding everything into RAM is inappropriate for ordinary browsers. This version keeps decoded geometry in a **128 MiB / 12-frame LRU**, a **48 MiB compressed in-memory cache**, and a **768 MiB bounded persistent raw-frame cache**. Background downloading stops at **512 MiB per selected trajectory**. The 60-second clip fits within these raw-cache limits. Browser quotas can prevent persistence; foreground playback remains available.
+A full minimal-cell trajectory contains 7,201 frames; downloading and decoding everything into RAM is inappropriate for ordinary browsers. This version keeps decoded geometry in a **128 MiB / 12-frame LRU**, a **48 MiB compressed in-memory cache**, and a **768 MiB bounded persistent raw-frame cache**. Background downloading stops at **512 MiB per selected trajectory**. The sampled full-cycle demo fits within these raw-cache limits. Browser quotas can prevent persistence; foreground playback remains available.
 
 Frames are prepared in a worker and ordinary instanced meshes are reused. Downloading everything does not eliminate GPU draw time or the cost of updating instance transforms. Rendering performance depends on scene complexity and the viewer's GPU; no universal frame-rate claim is made.
 

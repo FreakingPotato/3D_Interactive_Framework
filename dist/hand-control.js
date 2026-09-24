@@ -1,4 +1,4 @@
-import {handSide,fingerDigit,ComponentHold,componentDigits} from './hand-components.js';
+import {StableHandRoles,fingerDigit,ComponentHold,componentDigits} from './hand-components.js';
 import {HandGestures} from './hand-gestures.js';
 import {DwellSelection,timeFromTurn} from './hand-interactions.js';
 import {createTimeAura} from './time-aura.js';
@@ -13,14 +13,14 @@ export function initHandControl(getApp){
  const cursor=document.createElement('div');cursor.id='hand-cursor';cursor.hidden=true;document.body.append(cursor);
  const video=panel.querySelector('video'),status=panel.querySelector('#hand-status'),start=panel.querySelector('#hand-start'),stop=panel.querySelector('#hand-stop'),engine=new HandGestures(),dualEngine=new HandGestures(),dwell=new DwellSelection(),aura=createTimeAura(panel,video),chestTap=new ChestTap();
  let suitSequence=null,suiting=false,poseEnabled=false,lastPose=null;
- const componentHold=new ComponentHold();
+ const componentHold=new ComponentHold(),handRoles=new StableHandRoles();
  let resumePlayback=null;
  let cutSession=null,timeSession=null,pendingSeek=null,seekBusy=false,seekTimer=0,lastSeek=0;
  const runKey=()=>getApp()?.state.rep||getApp()?.state.run;
  function restorePlayback(){if(!resumePlayback||seekBusy||pendingSeek||timeSession)return;const session=resumePlayback;resumePlayback=null;const app=getApp();if(session.key===runKey()&&session.wasPlaying&&!app.state.playing){if(app.setPlaying)app.setPlaying(true);else document.querySelector('#play')?.click();}}
  function finishTime(){if(!timeSession)return;resumePlayback=timeSession;timeSession=null;if(pendingSeek)flushSeek();else restorePlayback();}
  async function flushSeek(){if(seekBusy||!pendingSeek)return;const task=pendingSeek;pendingSeek=null;if(task.key!==runKey())return;seekBusy=true;lastSeek=performance.now();try{await getApp().setTime(task.time);}finally{seekBusy=false;if(pendingSeek)seekTimer=setTimeout(flushSeek,150);else restorePlayback();}}
- function resetInteraction(){finishTime();componentHold.reset();dualEngine.reset();cutSession=null;dwell.reset();aura.hide();cursor.style.setProperty("--dwell",0);}
+ function resetInteraction(){finishTime();componentHold.reset();handRoles.reset();dualEngine.reset();cutSession=null;dwell.reset();aura.hide();cursor.style.setProperty("--dwell",0);}
  let worker=null,stream=null,generation=0,timer=0,watchdog=0,stale=0,busy=false,active=false,hoverUI=null,opacityStart=null,frames=0,lastMS=0;
  const bridge=()=>getApp()?.view?.gestures;
  const clear=()=>{cursor.hidden=true;hoverUI?.classList.remove('hand-ui-hover');hoverUI=null;bridge()?.clear();};
@@ -39,7 +39,7 @@ export function initHandControl(getApp){
   if(result.pose&&[11,12].every(i=>(result.pose[i]?.visibility||0)>.35))lastPose=result.pose;
   if(!document.querySelector('dialog[open]')){const trigger=chestTap.update(result,performance.now());if(trigger){startSuit(result.pose);return;}}else{chestTap.reset();}
   const modal=document.querySelector('dialog[open]');const parent=modal||document.body;if(cursor.parentNode!==parent){parent.append(cursor);dwell.reset();}
-  const now=performance.now(),sides=result.landmarks.map((_,i)=>handSide(result,i));
+  const now=performance.now(),sides=handRoles.update(result,now,{lockRight:!!engine.still||!!engine.timeMode});
   let action;
   if(result.landmarks.length===2){
    action=dualEngine.update(result.landmarks,now);

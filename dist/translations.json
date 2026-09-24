@@ -485,5 +485,10 @@
   "右手张掌静止三秒：时间宝石": "Hold right palm still for three seconds: Time Stone",
   "左右转掌：回溯或前进 · 握拳退出，恢复原播放状态": "Turn palm: rewind / forward · Make a fist to exit and restore playback",
   "左手数字选组件": "Left-hand component selection",
-  "左手 / Left hand": "Left hand"
+  "左手 / Left hand": "Left hand",
+  "完整周期 · Demo": "Full cycle · Demo",
+  "完整 120 分钟轨迹 · 默认 ×60，约 2 分钟播完；×120 约 1 分钟 · 含真实二分裂空间帧": "Full 120-minute trajectory · 60× ≈ 2 minutes; 120× ≈ 1 minute · Includes recorded binary fission",
+  "完整母细胞记录 · 默认 ×60，约 42 秒 · 模型分裂事件 2530 s；末次观测 2529 s · 三维位置为示意": "Full mother-cell record · 60× ≈ 42 seconds · Division event 2530 s; last observation 2529 s · Illustrative 3D positions",
+  "二分裂后 · ": "After binary fission · ",
+  "已二分裂": "Binary fission complete"
 }

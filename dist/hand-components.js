@@ -34,3 +34,29 @@ export class ComponentHold{
   return {digit,progress};
  }
 }
+
+// Track physical hands across frames instead of accepting a new role per frame.
+// A time gesture owns its right-hand track until that hand leaves or jumps away.
+export class StableHandRoles{
+ constructor(){this.reset();}
+ reset(){this.tracks=[];}
+ update(result,time,{lockRight=false}={}){
+  const hands=result.landmarks||[],tracks=this.tracks.filter(t=>time-t.last<=350),pairs=[];
+  const centers=hands.map(l=>({x:l[9].x,y:l[9].y}));
+  for(let i=0;i<hands.length;i++)for(let j=0;j<tracks.length;j++){const d=distance(centers[i],tracks[j].p);if(d<.16)pairs.push({i,j,d});}
+  pairs.sort((a,b)=>a.d-b.d);const used=new Set(),matched=new Map();
+  for(const {i,j} of pairs)if(!used.has(j)&&!matched.has(i)){used.add(j);matched.set(i,tracks[j]);}
+  this.tracks=hands.map((_,i)=>{
+   const observed=handSide(result,i);let t=matched.get(i);
+   if(!t)t={side:'unknown',candidate:observed,since:time,p:centers[i],last:time};
+   if(lockRight&&t.side==='right'){t.candidate=t.side;t.since=time;}
+   else if(observed==='unknown'||observed===t.side){t.candidate=t.side;t.since=time;}
+   else{if(t.candidate!==observed){t.candidate=observed;t.since=time;}if(time-t.since>=(t.side==='unknown'?160:700)){t.side=observed;t.since=time;}}
+   t.p=centers[i];t.last=time;return t;
+  });
+  const sides=this.tracks.map(t=>t.side);
+  // Ambiguous duplicate roles cannot launch a second conflicting interaction.
+  for(const side of ['left','right'])if(sides.filter(s=>s===side).length>1)for(let i=0;i<sides.length;i++)if(sides[i]===side)sides[i]='unknown';
+  return sides;
+ }
+}

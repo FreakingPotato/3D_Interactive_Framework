@@ -21,13 +21,13 @@ python3 -m http.server 8766 --bind 127.0.0.1 --directory _site
 
 Windows 可将 `python3` 换成 `py -3`。打开 **http://localhost:8766/**。不需要安装 Python 依赖、Node、模型求解器或建模工具。开发测试才需要 `npm ci`。
 
-- 左上角切换 vEcoli 与 minimal cell，每套案例包含 0–60 秒真实预处理数据。
+- 左上角切换 vEcoli 与 minimal cell，vEcoli 包含 0–2529 秒的完整母细胞记录与 2530 秒分裂事件；minimal cell 包含 0–7200 秒、262 帧原始空间快照，覆盖真实二分裂。默认 ×60（minimal 约 2 分钟）；×120 约 1 分钟。
 - 三维拖动、缩放、剖切、结构展开、选择和透明度调节。
 - 自愿开启本地摄像头手势；视频不上传，鼠标键盘始终可用。
 - 声音默认关闭；播放时随数据变化，选中群体只听该群体，也可暂停试听。
 - 不依赖 WCM 的粒子示例：**http://localhost:8766/examples/particle-lab/**。
 
-演示两套数据合计约 24 MB 压缩体积；完整软件包还包含即用的三维与手势资产。演示不运行实时求解器，不提供新实验计算。摄像头需要 localhost 或 HTTPS。
+演示两套数据合计约 163 MB 压缩体积；完整软件包还包含即用的三维与手势资产。演示不运行实时求解器，不提供新实验计算。摄像头需要 localhost 或 HTTPS。
 
 ## 用于其他项目
 
