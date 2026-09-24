@@ -1,0 +1,23 @@
+3D Interactive Framework
+Copyright 2026 FreakingPotato and contributors
+https://github.com/FreakingPotato/3D_Interactive_Framework
+
+A browser-based framework starter for interactive 3D exploration, local hand
+tracking, timeline navigation and procedural sonification. The whole-cell
+examples are applications of the framework, not models developed by this project.
+
+This project includes third-party software and scientific data under their own
+licenses. See THIRD_PARTY_NOTICES.md, LICENSES/, and demo-data/provenance.json.
+Retain applicable attribution notices when redistributing this work or derivatives.
+
+Scientific example credits:
+- Covert Lab: vEcoli / E. coli whole-cell model, MIT.
+- Zane Thornburg, Andrew Maytin and the Luthey-Schulten Lab and collaborators:
+  Minimal Cell 4D Whole-Cell Model; Zenodo 10.5281/zenodo.15579159, CC BY 4.0.
+- Google DeepMind and EMBL-EBI: AlphaFold Protein Structure Database, CC BY 4.0.
+
+These notices do not imply endorsement by the model authors, Google, or other
+upstream contributors. Marvel/Disney are not affiliated with this project.
+The optional red/gold armor is original procedural fan-inspired artwork, not
+an official character asset. Trademark and third-party character rights are
+not granted by the software license.

@@ -1,0 +1,11 @@
+{
+  "generator": "Blender 4.5.3 / build_assets.py",
+  "representation": "Procedural illustrative molecular surfaces; not PDB-derived atomic structures",
+  "seed": 17,
+  "structures": [
+    "ribosome large and small subunits",
+    "RNA polymerase",
+    "generic protein"
+  ],
+  "reference": "https://pdb101.rcsb.org/sci-art/goodsell-gallery/escherichia-coli-bacterium"
+}

@@ -1,0 +1,490 @@
+{
+  "sources": {
+    "hand_landmarker": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+    "pose_landmarker_lite": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+    "protein_structures": "dist/assets/structures/catalog.json",
+    "procedural_meshes": "dist/assets/asset-provenance.json",
+    "armor": "dist/assets/armor/provenance.json"
+  },
+  "files": [
+    {
+      "path": "dist/assets/armor/provenance.json",
+      "bytes": 425,
+      "sha256": "ebe22fc4caf9c3182060734a5f0ad98fd951313a6f1796b29564a0b820ac273c"
+    },
+    {
+      "path": "dist/assets/armor/suit-up.glb",
+      "bytes": 1432920,
+      "sha256": "d284de4cd8d5bd5b24a9721d7f80691dd7c4ed1b2ad8bd30cf33c01ca9465f38"
+    },
+    {
+      "path": "dist/assets/asset-provenance.json",
+      "bytes": 369,
+      "sha256": "439efc18215532a6459bd4f21daff4076f7624a14c1657abe51000b7477dc57e"
+    },
+    {
+      "path": "dist/assets/hand-tracking/SHA256SUMS",
+      "bytes": 231,
+      "sha256": "4530b0352158485a2a2b654a8bdadd8ddbe1fdfb4f0df9bf9bacb4286f4238e1"
+    },
+    {
+      "path": "dist/assets/hand-tracking/hand_landmarker.task",
+      "bytes": 7819105,
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+    },
+    {
+      "path": "dist/assets/hand-tracking/pose_landmarker_lite.task",
+      "bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    {
+      "path": "dist/assets/molecules.glb",
+      "bytes": 74240,
+      "sha256": "3342be039647d989a7d4be0e4b59964f9dacb65925bf7ea00d05617e7f75d8a1"
+    },
+    {
+      "path": "dist/assets/structures/0025-atomic-surface.json",
+      "bytes": 1700830,
+      "sha256": "edf0ccd013b55a52b4f12c5ba387167ddb3de8d312a7a77ac7200f77d0a89bf4"
+    },
+    {
+      "path": "dist/assets/structures/0025-surface.json",
+      "bytes": 28373,
+      "sha256": "806677e6e5c39d008eaa6b9d0c12b57c47a83695d7868cfb2371a2277ecb5673"
+    },
+    {
+      "path": "dist/assets/structures/0025.json",
+      "bytes": 73571,
+      "sha256": "946c5ed5e1468c67b53b8cf54d0bc83bb47417730a3666bec3803eaab78b5335"
+    },
+    {
+      "path": "dist/assets/structures/0082-atomic-surface.json",
+      "bytes": 1707923,
+      "sha256": "288b16cfc05fc012e7e609a52130848cec60c1f05b6b3a8bd6eb959fcbc1556d"
+    },
+    {
+      "path": "dist/assets/structures/0082-surface.json",
+      "bytes": 27726,
+      "sha256": "3cbbac43ffb80985cb8fffc1ce7e7c4c56f27d79e567f27f5a66bce4a28a4557"
+    },
+    {
+      "path": "dist/assets/structures/0082.json",
+      "bytes": 74205,
+      "sha256": "5dd43886eaa4da0884130ebe4778d35bc90d3a1cf43b27add3c45f740b8f3a77"
+    },
+    {
+      "path": "dist/assets/structures/0131-atomic-surface.json",
+      "bytes": 5943995,
+      "sha256": "b8fff3e112766ce53af3927dffdaf7af92147b53c931aed0bacf2f512d09cd05"
+    },
+    {
+      "path": "dist/assets/structures/0131-surface.json",
+      "bytes": 22912,
+      "sha256": "78db704080d3a67a27d7edaece3304b03e7be5a795d5db10af5889b984cd6b10"
+    },
+    {
+      "path": "dist/assets/structures/0131.json",
+      "bytes": 272991,
+      "sha256": "80dfa6cb0f6e0d37f3960b59f1d7f3f27a012a6016043252c0cf640830eb68d2"
+    },
+    {
+      "path": "dist/assets/structures/0148-atomic-surface.json",
+      "bytes": 2907390,
+      "sha256": "78a006958d764e368b1b3be41356672a3a0dc97d94ebaf1c66895fad889c6ed7"
+    },
+    {
+      "path": "dist/assets/structures/0148-surface.json",
+      "bytes": 31078,
+      "sha256": "58830512a35701bd253a8b0ff5cdb5f9c6a1c358f3dac1b47186228983af5b28"
+    },
+    {
+      "path": "dist/assets/structures/0148.json",
+      "bytes": 128370,
+      "sha256": "36f50b169305629ce42cb777f5e6a8d57dc30fd4a5fc4a8e5f1bb7fdd314076a"
+    },
+    {
+      "path": "dist/assets/structures/0151-atomic-surface.json",
+      "bytes": 7863025,
+      "sha256": "303bed80c97ae12dcd59b7a3b29da3ce1c17ef3ae18369cbbf09bf7fe3dd7012"
+    },
+    {
+      "path": "dist/assets/structures/0151-surface.json",
+      "bytes": 22504,
+      "sha256": "9fa56b696e2985dab2bc67eb98e34017f62dcaba054f3358bdeb7023aa8a4562"
+    },
+    {
+      "path": "dist/assets/structures/0151.json",
+      "bytes": 361436,
+      "sha256": "263c22cee9edd396d8f35f67aeed8245fe3531eb66082b3acd501c6ae7fa537b"
+    },
+    {
+      "path": "dist/assets/structures/0199-atomic-surface.json",
+      "bytes": 1382809,
+      "sha256": "0c7a9070768da455360a790fc0091352343e39c46838e39f2d1c4b53fefb3a6d"
+    },
+    {
+      "path": "dist/assets/structures/0199-surface.json",
+      "bytes": 25582,
+      "sha256": "e9a9ef43fb82cf155261a08d5b4483bc5c9171ab47e41dd33c10b50673fd3b17"
+    },
+    {
+      "path": "dist/assets/structures/0199.json",
+      "bytes": 58654,
+      "sha256": "432bc0d42c49fbd6150c9b7ed9d44c07a3d18bb9a2e5954c40befd73fb6cc8f2"
+    },
+    {
+      "path": "dist/assets/structures/0200-atomic-surface.json",
+      "bytes": 3869505,
+      "sha256": "046b652ad50182d4c2593cb1e1b74e52f4494c9cf374e4bd8d46aeab8b2675b5"
+    },
+    {
+      "path": "dist/assets/structures/0200-surface.json",
+      "bytes": 29887,
+      "sha256": "d9d8eab0c5427cf1181a3d358ba8ce7d63c784ab3fc7aca358c978f44835b2da"
+    },
+    {
+      "path": "dist/assets/structures/0200.json",
+      "bytes": 175483,
+      "sha256": "8d59691d7b9fec00e55513877433dd346a1bf5f09e451882ca73916e2def27d3"
+    },
+    {
+      "path": "dist/assets/structures/0238-atomic-surface.json",
+      "bytes": 4422539,
+      "sha256": "b4b15c90786cd9604bc45529d58ca604d017f9035f124ca0fdf7ca756381a1ad"
+    },
+    {
+      "path": "dist/assets/structures/0238-surface.json",
+      "bytes": 23536,
+      "sha256": "7c81acb73340e29ea3279603219bca13158de15e7c374ad18e67684a7b7018ff"
+    },
+    {
+      "path": "dist/assets/structures/0238.json",
+      "bytes": 197923,
+      "sha256": "aa0c83e34835a7a2509fdc5617fe2d88225fc036d0e74a64dca25830f540a09e"
+    },
+    {
+      "path": "dist/assets/structures/0315-atomic-surface.json",
+      "bytes": 1182058,
+      "sha256": "34a90897e937d29177f78c30a4dbdf9df2b7510d472fbdd5d2bcce2a50d9a5eb"
+    },
+    {
+      "path": "dist/assets/structures/0315-surface.json",
+      "bytes": 30899,
+      "sha256": "ebfe21234ac9e7b704f1aed976741b5efe5547af007f59b663b2232c472f6187"
+    },
+    {
+      "path": "dist/assets/structures/0315.json",
+      "bytes": 50127,
+      "sha256": "d16b85fb429ac337e6383ef5d35193ff2ed85b8185acc0c231cb24676dd8590e"
+    },
+    {
+      "path": "dist/assets/structures/0391-atomic-surface.json",
+      "bytes": 3800297,
+      "sha256": "cd8cc842be94a14b794ace8a5e7be6c2f4c953098ff442c0c856b7bfd27413f6"
+    },
+    {
+      "path": "dist/assets/structures/0391-surface.json",
+      "bytes": 28906,
+      "sha256": "62ce6327035d1b18a976a704efc96b2a944962c9019027debf860e8790dd4517"
+    },
+    {
+      "path": "dist/assets/structures/0391.json",
+      "bytes": 169738,
+      "sha256": "a6fd81599a64046c71d8ae2f7feae178d0416cc0fd33fc03ee080697b587e816"
+    },
+    {
+      "path": "dist/assets/structures/0392-atomic-surface.json",
+      "bytes": 2174313,
+      "sha256": "f33537faf49bd16358325a47697ca7df20725aca01b83fb1ad79e4f967fa9058"
+    },
+    {
+      "path": "dist/assets/structures/0392-surface.json",
+      "bytes": 28836,
+      "sha256": "5bd8daf19c146bf0e7d6cc15dd4b86fe10222d9b1429550e09dfc2c9c64862bc"
+    },
+    {
+      "path": "dist/assets/structures/0392.json",
+      "bytes": 94173,
+      "sha256": "ac20ca96944d09f82b4a124d4c24a584ff94113e7f8d869e7387ca9f3c0c9272"
+    },
+    {
+      "path": "dist/assets/structures/0499-atomic-surface.json",
+      "bytes": 1925161,
+      "sha256": "91e4ea0794e90889701754b33a34a03466bee5c7ce4f2cac1b7cf2e824cc8a48"
+    },
+    {
+      "path": "dist/assets/structures/0499-surface.json",
+      "bytes": 28682,
+      "sha256": "8a7e15de2566634a8ad52cb1f0570c68d11e4f37914dde5023d08e6d7852be12"
+    },
+    {
+      "path": "dist/assets/structures/0499.json",
+      "bytes": 84687,
+      "sha256": "64009c4e4dbf34e3cdde39d4e1d2b33b7a761e51e60f3dd7fa548df03760cb13"
+    },
+    {
+      "path": "dist/assets/structures/0500-atomic-surface.json",
+      "bytes": 2196378,
+      "sha256": "9045a15ad67ffd47c1ad975b97a98cbaa6ae38d85ce331307f571b7ae0377896"
+    },
+    {
+      "path": "dist/assets/structures/0500-surface.json",
+      "bytes": 28345,
+      "sha256": "cf8f639dd2208e49d0f4d44538180a39fddcec405e012f7b1b82e69496478b2f"
+    },
+    {
+      "path": "dist/assets/structures/0500.json",
+      "bytes": 97289,
+      "sha256": "50c75d09f72df1161909ab59b22b7d7156197da94fd8080cffc925ac6cbdeadf"
+    },
+    {
+      "path": "dist/assets/structures/0513-atomic-surface.json",
+      "bytes": 2378240,
+      "sha256": "17889f94c7fc7dde5370dfb9ddf131a7a0b642c0864a0bc308e3ee44ac34abd2"
+    },
+    {
+      "path": "dist/assets/structures/0513-surface.json",
+      "bytes": 30976,
+      "sha256": "bb73db63521b2c8a87c03c24bd5103f43597afe4021d8c393543c97efe50ebc5"
+    },
+    {
+      "path": "dist/assets/structures/0513.json",
+      "bytes": 104573,
+      "sha256": "d1d9106bc7c658a2a5927835f59d11afc6cf74e59ed6fb0f3eacdee51394a273"
+    },
+    {
+      "path": "dist/assets/structures/0515-atomic-surface.json",
+      "bytes": 3390075,
+      "sha256": "59bce875bc026ba0b7ac7e61a9331b60b0a342c79b625fa0ea0be7740656181c"
+    },
+    {
+      "path": "dist/assets/structures/0515-surface.json",
+      "bytes": 24911,
+      "sha256": "541bc7578eef38fac953949c8dc96c5e17f4eeffb78c7098bcc7896149789c03"
+    },
+    {
+      "path": "dist/assets/structures/0515.json",
+      "bytes": 151909,
+      "sha256": "8c1db7c95e26bc324ec7ccfd55a43dab4a1739e6237783127f4d566433b303ff"
+    },
+    {
+      "path": "dist/assets/structures/0526-atomic-surface.json",
+      "bytes": 1274455,
+      "sha256": "69a9928f8deca7bc06fcc848ec0acca77f34a254004e78f56f0ca24a3bd92a60"
+    },
+    {
+      "path": "dist/assets/structures/0526-surface.json",
+      "bytes": 32386,
+      "sha256": "f738a393f7a4854b0191e5ca51a4c0e9ef218e50e8993a7ceb38a374918a26a8"
+    },
+    {
+      "path": "dist/assets/structures/0526.json",
+      "bytes": 53774,
+      "sha256": "87e2b38a26d59710185c043ab02f3a9c5adff235915bddea98d0dce663e6519a"
+    },
+    {
+      "path": "dist/assets/structures/0620-atomic-surface.json",
+      "bytes": 3351186,
+      "sha256": "88a676413ce46581863fd6e1d65400d265a9d4a52f0e49a2ccdc8c96a9d3ff87"
+    },
+    {
+      "path": "dist/assets/structures/0620-surface.json",
+      "bytes": 25387,
+      "sha256": "93053a48d678fb626b2d92f1906ac76d19806a5ee4993d75b963880e28d6fbfc"
+    },
+    {
+      "path": "dist/assets/structures/0620.json",
+      "bytes": 146995,
+      "sha256": "6907d5151377ee4cd5815fedfbb20819f444f896421c859b0a2ab63d32da183a"
+    },
+    {
+      "path": "dist/assets/structures/0621-atomic-surface.json",
+      "bytes": 1575228,
+      "sha256": "38902bc6a91469e8b00a0ec017e239adf4fc5e224891cf195db21c227c44598f"
+    },
+    {
+      "path": "dist/assets/structures/0621-surface.json",
+      "bytes": 25613,
+      "sha256": "3a0e1e6c1cbe8adfcbae47ce7d4666186da874b0903cb38b497ce6c8846fd033"
+    },
+    {
+      "path": "dist/assets/structures/0621.json",
+      "bytes": 68172,
+      "sha256": "956c02e9268f118ce2117eb123c86f065adfc1a09507f7793da4d2890bee2d4b"
+    },
+    {
+      "path": "dist/assets/structures/0644-atomic-surface.json",
+      "bytes": 2587897,
+      "sha256": "f9e04b22e7c86cda1494b0cf2d2262763fbaf29259a09ea041ecea630b44a14f"
+    },
+    {
+      "path": "dist/assets/structures/0644-surface.json",
+      "bytes": 24659,
+      "sha256": "32785cd6c388b5c8747effe8753508ce4387e82cdac8d51038c7c27d0d8b8c80"
+    },
+    {
+      "path": "dist/assets/structures/0644.json",
+      "bytes": 114381,
+      "sha256": "b8e426bbe4955d6ca96050a70d23c22718ca0303a1dcb7f44fed708b1768057d"
+    },
+    {
+      "path": "dist/assets/structures/0646-atomic-surface.json",
+      "bytes": 2537846,
+      "sha256": "c355e138bdcec5ce16e122299d12f6ed03606a0417de63de019f13ec9bd81471"
+    },
+    {
+      "path": "dist/assets/structures/0646-surface.json",
+      "bytes": 26901,
+      "sha256": "ef323ecae764ec275600003fb314d36130ea1c457b83c97c05010f5c5304f6bf"
+    },
+    {
+      "path": "dist/assets/structures/0646.json",
+      "bytes": 112890,
+      "sha256": "7aa21b70a0917f05c905d831febc4bdfc1186895e54c0b2aee5de25b0ff69036"
+    },
+    {
+      "path": "dist/assets/structures/0653-atomic-surface.json",
+      "bytes": 2938150,
+      "sha256": "10acd7ccf3f1b5b1d4f85350cec86c5bf6aa1e923ab8bc0a481b38d1e4510998"
+    },
+    {
+      "path": "dist/assets/structures/0653-surface.json",
+      "bytes": 25382,
+      "sha256": "e1c91a5a53b0219e0cb4e32de100c80a1e2588505db5a5333cca5af40b05a827"
+    },
+    {
+      "path": "dist/assets/structures/0653.json",
+      "bytes": 130514,
+      "sha256": "45c4d532ee25cb58e03d02eded1f88fc2c4869195eb0d4b45895d1d2391c542d"
+    },
+    {
+      "path": "dist/assets/structures/0655-atomic-surface.json",
+      "bytes": 2446753,
+      "sha256": "4ecca47117b7bee963f789025381eb0f0394e4535192350db7cf1ccb0bde0e7b"
+    },
+    {
+      "path": "dist/assets/structures/0655-surface.json",
+      "bytes": 30120,
+      "sha256": "fc84463c7760e9602d02cbb2b55b559026b029a9f35491fffba59c5aaed094a8"
+    },
+    {
+      "path": "dist/assets/structures/0655.json",
+      "bytes": 108580,
+      "sha256": "bf6927f97ec671ea4994ccf045fe5c41a3b82160c215f7d7b93f6676a12e5001"
+    },
+    {
+      "path": "dist/assets/structures/0657-atomic-surface.json",
+      "bytes": 2669240,
+      "sha256": "d8aa3046ae6d38ca641aace237150de10c3a0e414022893f0ddcdc86818f5857"
+    },
+    {
+      "path": "dist/assets/structures/0657-surface.json",
+      "bytes": 26519,
+      "sha256": "b2b5501d6397107462ab3dde32cdd4289eb6f80036671a7d33d5f3021465162a"
+    },
+    {
+      "path": "dist/assets/structures/0657.json",
+      "bytes": 117476,
+      "sha256": "cd96b6ccbd9e6d5a0a30c202d5328f895aa4ae2d3f842d1de70f66eb0a0576fb"
+    },
+    {
+      "path": "dist/assets/structures/0661-atomic-surface.json",
+      "bytes": 2428178,
+      "sha256": "97724d5bcb253abed554abe56a505a8b73c329b36978321b382f3b7bf8516cc4"
+    },
+    {
+      "path": "dist/assets/structures/0661-surface.json",
+      "bytes": 23834,
+      "sha256": "bf34be4f6f5f1df08feb2eab4a05d52876ab40fc9fa065c2e2eddd8d4c977fff"
+    },
+    {
+      "path": "dist/assets/structures/0661.json",
+      "bytes": 109052,
+      "sha256": "e74ccfca443ce1204bfca3aeefeabe4f3fcd02078e7112af4ecbc28a3ea9b0f5"
+    },
+    {
+      "path": "dist/assets/structures/0663-atomic-surface.json",
+      "bytes": 2928554,
+      "sha256": "442beb8b98a0a05717190ab684211b02d0a2584de0c96f1c824c37c65ddda3ae"
+    },
+    {
+      "path": "dist/assets/structures/0663-surface.json",
+      "bytes": 30226,
+      "sha256": "5ddf39e5b3244067a9b1091456cc1a2421b81617b15bcce1c2c9a9c0577915f7"
+    },
+    {
+      "path": "dist/assets/structures/0663.json",
+      "bytes": 129682,
+      "sha256": "01abbfebaf1cd7f526767e4121e8339a7ba562bbeeb7b1dc9cad3d7cb9dfc777"
+    },
+    {
+      "path": "dist/assets/structures/0665-atomic-surface.json",
+      "bytes": 4924200,
+      "sha256": "996aae6573532c5f4e95c9b2712bab1791c54096c908e4c340634097fe59b8e2"
+    },
+    {
+      "path": "dist/assets/structures/0665-surface.json",
+      "bytes": 26847,
+      "sha256": "0415c393dd0ff48f329fbfe9f44f77cb41079a6db5f78093fee3017476b7c32f"
+    },
+    {
+      "path": "dist/assets/structures/0665.json",
+      "bytes": 218763,
+      "sha256": "9c5fdf8e1e20caa83bc0d2ae4bb249e431af8df5967a773302192d92033801ce"
+    },
+    {
+      "path": "dist/assets/structures/0667-atomic-surface.json",
+      "bytes": 1886211,
+      "sha256": "fee78ce84aa4ba4431737e015c88a06981bca8ae4893bd3359b01fc1b6e427a5"
+    },
+    {
+      "path": "dist/assets/structures/0667-surface.json",
+      "bytes": 27166,
+      "sha256": "ef9c1f005937ca42079055d1822bcbd6dfd145a7fab5f9acb104b5af1af5b758"
+    },
+    {
+      "path": "dist/assets/structures/0667.json",
+      "bytes": 81893,
+      "sha256": "5a5088a96adf2e8cab8b9e358724a5411e82e5758fd2597a0a16d43a16ddae8d"
+    },
+    {
+      "path": "dist/assets/structures/0806-atomic-surface.json",
+      "bytes": 2418682,
+      "sha256": "bbcd071a62767334f7bdb968209cace49224729b17c74fc4d4a6c059f7a747a0"
+    },
+    {
+      "path": "dist/assets/structures/0806-surface.json",
+      "bytes": 26123,
+      "sha256": "3113f562b8e5e4e6cffcc96ab5e2197835ba14587c28a8e3f9d376a07a15e60d"
+    },
+    {
+      "path": "dist/assets/structures/0806.json",
+      "bytes": 106840,
+      "sha256": "8dcf6d9aec96e0afa02d5f8beb192b388ef7a710f6883fa9537eb11167a38986"
+    },
+    {
+      "path": "dist/assets/structures/0810-atomic-surface.json",
+      "bytes": 2906548,
+      "sha256": "9e203ee1008dc0505ab24aa9d79d5362d75b53a69f388b02ebab5f242c3ac13f"
+    },
+    {
+      "path": "dist/assets/structures/0810-surface.json",
+      "bytes": 29917,
+      "sha256": "275bca82564a354650fa7b104cc4f233f6256d962f6411fc99d3324dd2724744"
+    },
+    {
+      "path": "dist/assets/structures/0810.json",
+      "bytes": 128117,
+      "sha256": "c6452deadfbfa9316f085f61e5fb8ac77911418b985e2c08612f4de424c80858"
+    },
+    {
+      "path": "dist/assets/structures/catalog.json",
+      "bytes": 155331,
+      "sha256": "c9c5a43ef824e3bab2cd52d82b23b50cf7ce304db55d9a43624c3c2982852185"
+    }
+  ],
+  "official_model_etags": {
+    "hand_landmarker": "15318430ea3851670fe9914116a9cfad",
+    "pose_landmarker_lite": "04a75ddf7c811ac7a1a4523266dd7d88"
+  }
+}

@@ -1,0 +1,14 @@
+import {chromium} from 'playwright';import assert from 'node:assert/strict';
+const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{}),headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--use-angle=swiftshader','--enable-unsafe-swiftshader','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']});
+try{const p=await browser.newPage({viewport:{width:1280,height:900}});p.setDefaultTimeout(120000);p.setDefaultNavigationTimeout(120000);const errors=[],bad=[],api=[];p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)bad.push([r.status(),r.url()]);});p.on('request',r=>{if(new URL(r.url()).pathname.startsWith('/api'))api.push(r.url());});
+for(const system of ['vecoli','minimal']){
+ await p.goto((process.env.STATIC_URL||'http://127.0.0.1:8770')+'/3D_Interactive_Framework/?system='+system);await p.waitForFunction(()=>window.cellSound&&(window.minimalObservatory||window.observatory)?.ready());
+ await p.evaluate(()=>{const a=window.minimalObservatory||window.observatory;if(a.state.playing)document.querySelector('#play').click();});
+ assert(await p.locator('#experiment-open').isDisabled());
+ await p.evaluate(async()=>{await (window.minimalObservatory||window.observatory).setTime(60);});await p.waitForFunction(()=>(window.minimalObservatory||window.observatory).state.time===60);
+ await p.evaluate(()=>(window.minimalObservatory||window.observatory).select('protein'));await p.screenshot({path:'logs/static-'+system+'.png'});
+ if(system==='minimal'){await p.waitForFunction(()=>minimalObservatory.frameCache().download.status==='complete',{},{timeout:180000});assert.equal(await p.evaluate(()=>minimalObservatory.frameCache().download.done),61);const counts=await p.evaluate(()=>({actual:minimalObservatory.state.frame.particle_count,rendered:minimalObservatory.view.debug().renderedParticles}));assert.equal(counts.actual,counts.rendered);console.log('COUNTS',counts);}
+ console.log('PASS static prefix',system,'0–60 s, selection, no live jobs');
+}
+await p.goto((process.env.STATIC_URL||'http://127.0.0.1:8770')+'/3D_Interactive_Framework/examples/particle-lab/');await p.waitForFunction(()=>window.particleLab&&window.handControl);await p.locator('[data-group=amber]').click();assert.equal(await p.evaluate(()=>particleLab.state.selected),'amber');await p.locator('#sound').click();await p.screenshot({path:'logs/static-particle-lab.png'});await p.locator('#sound').click();assert.deepEqual(api,[]);assert.deepEqual(bad,[]);assert.deepEqual(errors,[]);console.log('PASS non-cell adapter, sound, isolated static hosting, no failed assets or API requests');
+}finally{await browser.close();}

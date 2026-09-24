@@ -1,0 +1,9 @@
+dist/vendor/** linguist-vendored
+dist/assets/** linguist-generated
+demo-data/** linguist-generated
+ASSET_MANIFEST.json linguist-generated
+*.glb binary
+*.blend binary
+*.gz binary
+*.wasm binary
+*.task binary

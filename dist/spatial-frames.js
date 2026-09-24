@@ -1,0 +1,9 @@
+import {FrameCache} from './frame-cache.js';
+export function createSpatialFrames(){const downloader=new Worker('/frame-download-worker.js',{type:'module'});let download={status:'idle',done:0,total:0,bytes:0};downloader.onmessage=({data})=>{download=data;window.dispatchEvent(new CustomEvent('frame-download',{detail:data}));};
+ const worker=new Worker('/frame-worker.js',{type:'module'}),jobs=new Map();let next=0,failed=null;
+ worker.onmessage=({data})=>{const job=jobs.get(data.id);if(!job)return;jobs.delete(data.id);job.signal.removeEventListener('abort',job.abort);if(data.error)job.reject(data.aborted?new DOMException(data.error,'AbortError'):Error(data.error));else job.resolve(data.frame);};
+ worker.onerror=e=>{failed=Error(e.message||'Frame worker failed');for(const job of jobs.values()){job.signal.removeEventListener('abort',job.abort);job.reject(failed);}jobs.clear();};
+ const cache=new FrameCache((url,signal)=>new Promise((resolve,reject)=>{if(failed){reject(failed);return;}if(signal.aborted){reject(new DOMException('Cancelled','AbortError'));return;}const id=++next;const abort=()=>{worker.postMessage({id,cancel:true});jobs.delete(id);reject(new DOMException('Cancelled','AbortError'));};jobs.set(id,{resolve,reject,signal,abort});signal.addEventListener('abort',abort,{once:true});worker.postMessage({id,url});}));
+ const originalClear=cache.clear.bind(cache);cache.clear=()=>{downloader.postMessage({stop:true});download={status:'idle',done:0,total:0,bytes:0};window.dispatchEvent(new CustomEvent('frame-download',{detail:download}));originalClear();};cache.downloadAll=urls=>downloader.postMessage({urls});cache.pauseDownload=value=>downloader.postMessage({pause:!!value});const debug=cache.debug.bind(cache);cache.debug=()=>({...debug(),download});
+ window.addEventListener('pagehide',()=>{cache.clear();worker.terminate();downloader.terminate();});return cache;
+}

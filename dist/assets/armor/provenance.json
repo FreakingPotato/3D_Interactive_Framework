@@ -1,0 +1,15 @@
+{
+  "generator": "Blender 4.5.3 LTS",
+  "source": "scripts/build_armor.py",
+  "representation": "Original stylized hard-surface red/gold armor, not a film mesh",
+  "materials": "Metallic/roughness PBR, clear coat, emissive optics",
+  "animation": "Baked assembly, articulated two-finger salute, helmet nod",
+  "duration_seconds": 7,
+  "shoulder_span": 2,
+  "shoulder_origin": [
+    0,
+    0,
+    0
+  ],
+  "triangles": 26407
+}

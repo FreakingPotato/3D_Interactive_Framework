@@ -1,0 +1,12 @@
+_site/
+node_modules/
+.venv*/
+__pycache__/
+*.pyc
+*.blend1
+logs/
+/vendor/
+data/*
+!data/gene_presets.json
+.env
+.env.*

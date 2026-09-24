@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this framework if it helps your work, and separately cite the scientific models and datasets you use (THIRD_PARTY_NOTICES.md)."
+title: "3D Interactive Framework"
+type: software
+authors:
+  - name: "FreakingPotato"
+    website: "https://github.com/FreakingPotato"
+repository-code: "https://github.com/FreakingPotato/3D_Interactive_Framework"
+url: "https://github.com/FreakingPotato/3D_Interactive_Framework"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-09-25
+abstract: "A browser-based framework starter for interactive 3D data exploration, local hand gestures and procedural sonification, illustrated with two whole-cell model adapters."
