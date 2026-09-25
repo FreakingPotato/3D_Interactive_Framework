@@ -6,11 +6,9 @@ A browser-based framework starter combining detailed 3D scenes, on-device hand i
 
 Whole-cell models are our first applications — **the framework is not a whole-cell simulator**. The scientific models belong to their original authors.
 
-[中文说明](README.zh-CN.md) · [Quick start](#run-locally) · [Build your own adapter](docs/ADAPTERS.md) · [Credits](THIRD_PARTY_NOTICES.md)
+**[Demo](https://freakingpotato.github.io/3D_Interactive_Framework/)** · [中文说明](README.zh-CN.md) · [Quick start](#run-locally) · [Build your own adapter](docs/ADAPTERS.md) · [Credits](THIRD_PARTY_NOTICES.md)
 
-> The intended Pages URL is `https://freakingpotato.github.io/3D_Interactive_Framework/`. It becomes live after the owner enables GitHub Pages (GitHub Actions) and the deployment workflow succeeds. See [deployment](docs/PUBLISHING.md); this README does not claim an unpublished URL is already live.
-
-![Interactive cell explorer](docs/preview.png)
+[![Interactive cell explorer](docs/preview.png)](https://freakingpotato.github.io/3D_Interactive_Framework/)
 
 ## What you can reuse
 
